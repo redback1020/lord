@@ -1,0 +1,128 @@
+﻿<?php
+require_once '../manage/checkPriv.php';
+?>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css" />
+<script>
+$(document).ready(function(){
+	$("#platformId").val("<?=isset($_GET['tt'])?$_GET['tt']:'all'?>");
+});
+</script>
+<?php
+$player = file_get_contents('http://180.150.178.112/log/onlinePlayer.log');
+$obj = json_decode($player);
+$totals = file_get_contents('http://180.150.178.112/log/onlineTotals.log');
+$totals = $totals ? json_decode($totals,1) : array();
+?>
+<body>
+  	<div style="padding:8px 10px;">
+		<form method="get">
+			<fieldset>
+			<legend>在线用户列表(每分钟更新)</legend>
+			<div class="row">
+				<input type="hidden" id="time" name="time" value="<?=$_GET['time']?>">
+				<input type="hidden" id="sign" name="sign" value="<?=$_GET['sign']?>"> 
+				<div span="span1" style="float:right;">
+					<input type="submit" value="查&nbsp;&nbsp;询"  class="btn" />
+				</div>
+				<div class="span2" style="width:700;">
+					<select class="span2" id="platformId" name="tt">
+						<option value="all">全部</option>
+						<option value="table">牌桌</option>
+						<option value="room">房间</option>
+						<option value="hall">大厅</option>
+					</select>&nbsp;&nbsp;的用户
+				</div>
+			</div>
+			</fieldset>
+		</form>
+
+		<?php if ( $totals ) { ?>
+		<div><table class="table table-bordered table-condensed table-hover" style="font-size:12px;">
+			<tr class="info" style="font-size:14px;">
+				<td>在线总计: <?php echo $totals['在线总计']; ?></td>
+				<td>只在房间: <?php echo $totals['只在房间']; ?></td>
+				<td>只在大厅: <?php echo $totals['只在大厅']; ?></td>
+				<td colspan="2">统计时间: <?php echo $totals['统计时间']; ?></td>
+			</tr>
+			<tr class="info" style="font-size:14px;">
+				<td>房间个数: <?php echo $totals['房间个数']; ?></td>
+				<td>牌桌个数: <?php echo $totals['牌桌个数']; ?></td>
+				<td>在桌活跃: <?php echo $totals['在桌活跃']; ?></td>
+				<td>在桌掉线: <?php echo $totals['在桌掉线']; ?></td>
+				<td>在桌假人: <?php echo $totals['在桌假人']; ?></td>
+			</tr>
+			<?php foreach ( $totals['房间详情'] as $k => $v ) { ?>
+			<tr>
+				<td>房间编号: <?php echo $v['房间编号']; ?></td>
+				<td>牌桌个数: <?php echo $v['牌桌个数']; ?></td>
+				<td>在桌活跃: <?php echo $v['在桌活跃']; ?></td>
+				<td>在桌掉线: <?php echo $v['在桌掉线']; ?></td>
+				<td>在桌假人: <?php echo $v['在桌假人']; ?></td>
+			</tr>
+			<?php } ?>
+		</table></div>
+		<?php } ?>
+
+		<table class="table table-bordered table-condensed table-hover" style="font-size:12px;">
+			<tbody id="inRoomUser">
+				<tr class="info">
+					<td width="10%"><strong>房间号</strong></td>
+					<td width="10%"><strong>牌桌号</strong></td>
+					<td width="10%"><strong>靓号</strong></td>
+					<td width="10%"><strong>昵称</strong></td>
+					<td width="10%"><strong>UID</strong></td>
+					<td width="10%"><strong>性别</strong></td> 
+					<td width="10%"><strong>当前筹码</strong></td>  
+					<td width="10%"><strong>当前乐币</strong></td>
+					<td width="10%"><strong>等级</strong></td> 
+					<td width="10%"><strong>exp</strong></td>
+					<td width="10%"><strong>win</strong></td>
+					<td width="10%"><strong>play</strong></td>
+				</tr>
+				<?php
+					$par = ""; 
+					foreach($obj as $val)
+					{
+						$type = "";$dis = "";
+						if($val->roomId){
+							if($val->tableId){
+								$type = "table";
+							}else{
+								$type = "room";
+							}
+						}else{
+							$type = "hall";
+						}
+						if(isset($_GET['tt'])){
+							if($_GET['tt'] == "table"){
+								if($type != "table") $dis=' style="display:none"';
+							}elseif($_GET['tt'] == "room"){
+								if($type == "hall") $dis=' style="display:none"';
+							}elseif($_GET['tt'] == "hall"){
+								if($type != "hall") $dis=' style="display:none"';
+							}
+						}
+				?>
+				<tr class="table-body"<?=$dis?>>
+					<td><?=$val->roomId?$val->roomId:"&nbsp;";?></td>
+					<td><?=$val->tableId?$val->tableId:"&nbsp;";?></td>
+					<td><?=$val->cool_num?></td>
+					<td nowrap><?=$val->nick?></td>
+					<td><a href="userInfo.php?uid=<?=$val->uid?>"><?=$val->uid?></a></td>
+					<td><?=$val->sex==1?"男":"女";?></td>
+					<td><?=$val->coins?>&nbsp;</td>
+					<td><?=$val->gold?>&nbsp;</td>
+					<td><?=$val->level?>&nbsp;</td>
+					<td><?=$val->exp?>&nbsp;</td>
+					<td><?=$val->gameData->win?>&nbsp;</td>
+					<td><?=$val->gameData->matches?>&nbsp;</td>
+				</tr>
+				<?php
+					}
+				?>
+			</tbody>
+		</table>
+
+	</div>
+</body>

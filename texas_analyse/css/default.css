@@ -1,0 +1,168 @@
+body {
+    font-family: ËÎÌו;
+    font-size: 12px;
+    margin: 5px 0 0;
+}
+a,.val{
+cursor:pointer;
+}
+a:link {
+    color: #000000;
+    text-decoration: none;
+}
+a:visited {
+    color: #000000;
+    text-decoration: none;
+}
+a:hover {
+    color: #FF6600;
+    text-decoration: underline;
+}
+a:active {
+    text-decoration: none;
+}
+
+.red {
+    color: red;
+}
+.textbox {
+    background: none repeat scroll 0 0 #F7F7F7;
+    border: 1px solid #646464;
+    height: 18px;
+}
+.textarea {
+    background: none repeat scroll 0 0 #F7F7F7;
+    border: 1px solid #646464;
+}
+.button {
+    background: url("../image/btn.gif") repeat scroll 0 0 transparent;
+    border: 1px solid #507BAE;
+    color: black;
+    cursor: pointer;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+}
+.table1 {
+    background-color: #EFEFEF;
+    border: 1px solid #DDDDDD;
+    padding: 5px;
+}
+.table2 {
+    background-color: #EFEFEF;
+    border: 1px solid #DDDDDD;
+    padding: 5px;
+	
+}
+.table3 {
+    background-color: #FFFFFF;
+    border: 1px solid #507BAE;
+	word-wrap : break-word;
+	table-layout:fixed;
+	
+}
+.table1-title {
+    color: #507BAE;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+}
+.table {
+    background-color: #FFFFFF;
+    border: 1px solid #507BAE;
+	word-wrap : break-word;
+	table-layout:fixed;
+}
+.table-title {
+    background-color: #FFFFFF;
+    color: #507BAE;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 25px;
+}
+.table-head {
+    background-color: #507BAE;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 25px;
+    text-align: center;
+}
+.table-head-left {
+    background-color: #507BAE;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 25px;
+    text-align: left;
+}
+.table-head1 {
+    background-color: #507BAE;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 18px;
+    text-align: left;
+}
+.table-body {
+    background-color: #FFFFFF;
+    font-family: verdana,ËÎÌו;
+    font-size: 12px;
+    line-height: 22px;
+    text-align: center;
+}
+.table-body-left {
+    background-color: #FFFFFF;
+    font-family: verdana,ËÎÌו;
+    font-size: 12px;
+    line-height: 22px;
+}
+.dis{
+	display:none;
+}
+/*ordersearch*/
+.base-info{
+width:330px;
+height:180px;
+float:left;
+margin:20px 10px 10x 0;
+}
+.title{
+width:200px;
+height:26px;
+margin-top:20px;
+}
+.name{
+width:100px;
+height:26px;
+text-align:center;
+line-height:26px;
+font-weight:bold;
+color:#fff;
+background:#507BAE;
+float:left;
+margin-right:10px;
+margin-bottom:10px;
+border:1px solid #507BAE;
+}
+.val{
+width:200px;
+height:26px;
+text-align:center;
+line-height:26px;
+float:left;
+margin-right:10px;
+margin-bottom:10px;
+border:1px solid #507BAE;
+}
+.other-info{
+width:330px;
+height:500px;
+margin:20px 10px 10x 0;
+float:left;
+}
+#main{
+width:950px;
+height:500px;
+margin:0 auto;
+}

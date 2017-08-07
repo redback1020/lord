@@ -1,0 +1,26 @@
+#!/bin/sh
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+
+ulimit -c unlimited
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+touch $DIR/master.pid
+msts=`cat $DIR/master.pid`
+
+for mst in $msts
+do
+	kill -15 $mst
+done
+
+sleep 6
+
+pids=`ps -eaf | grep "$DIR/sweety9" | grep -v "grep"| awk '{print $2}'`
+
+for pid in $pids
+do
+	kill -9 $pid
+done
+
+rm -f $DIR/master.pid

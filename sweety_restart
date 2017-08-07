@@ -1,0 +1,45 @@
+s#!/bin/sh
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+
+ulimit -c unlimited
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+touch $DIR/master.pid
+msts=`cat $DIR/master.pid`
+
+for mst in $msts
+do
+	kill -15 $mst
+done
+
+sleep 6
+
+pids=`ps -eaf | grep "$DIR/sweety9" | grep -v "grep"| awk '{print $2}'`
+
+for pid in $pids
+do
+	kill -9 $pid
+done
+
+rm -f $DIR/master.pid
+
+# backup log
+DATEID=`date +%Y%m%d%H%M%S`
+touch $DIR/game/log/sweety.log
+mv $DIR/game/log/sweety.log $DIR/game/log/${DATEID}.sweety.log
+
+# clean redis
+# /usr/local/redis/bin/redis-cli -p 6379 flushdb
+
+# sweety start
+touch $DIR/game/log/sweety.log
+touch $DIR/game/log/cron.log
+touch $DIR/game/log/api.log
+chmod 755 $DIR/game/log/sweety.log
+chmod 755 $DIR/game/log/cron.log
+chmod 755 $DIR/game/log/api.log
+nohup /usr/local/php7/bin/php $DIR/sweety9000.php >> $DIR/game/log/sweety.log 2>&1 &
+# nohup /usr/local/php7/bin/php $DIR/sweety9001.php >> $DIR/game/log/sweety.log 2>&1 &
+# tail -f $DIR/game/log/sweety.log

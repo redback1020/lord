@@ -1,0 +1,22 @@
+<?php $data_tesk_id_list = array (
+    //新手场
+    '1000'=>array('id'=>10267,'target'=>5,'reward'=>10),
+    //
+    '1001'=>array('id'=>10266,'target'=>5,'reward'=>25),
+    //中级场
+    '1002'=>array('id'=>10268,'target'=>5,'reward'=>50),
+    //高级场
+	'1003'=>array('id'=>10269,'target'=>5,'reward'=>100),
+	//无限场
+	'1006'=>array('id'=>10295,'target'=>5,'reward'=>100),
+    //新手癞
+    '1007'=>array('id'=>10270,'target'=>5,'reward'=>15),
+    //初级癞
+    '1008'=>array('id'=>10272,'target'=>5,'reward'=>30),
+	//中级癞
+    '1009'=>array('id'=>10271,'target'=>5,'reward'=>60),
+	//高级癞
+    '1010'=>array('id'=>10273,'target'=>5,'reward'=>120),
+	//无限癞
+    '1011'=>array('id'=>10296,'target'=>5,'reward'=>120),
+);

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title></title>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #AFAFAF;
+}
+
+.div {
+	position:absolute;
+	left:0;
+	top:300px;
+}
+-->
+</style>
+
+<script language="javascript">
+	
+show_menu = true;
+function showMenu() {
+	if(show_menu) {
+		show_menu = false;
+		parent.document.all.main.cols="0,10,*";
+		document.getElementById("arrowimage").src = "../image/middle_right1.gif";
+	}else{
+		show_menu = true;
+		parent.document.all.main.cols="150,10,*";
+		document.getElementById("arrowimage").src = "../image/middle_left1.gif";
+	}
+}
+
+function changeImage(in_out) {
+	if (in_out == "in") {
+		if(show_menu) {
+			document.getElementById("arrowimage").src = "../image/middle_left2.gif";
+		} else {
+			document.getElementById("arrowimage").src = "../image/middle_right2.gif";
+		}
+	} else {
+		if(show_menu) {
+			document.getElementById("arrowimage").src = "../image/middle_left1.gif";
+		} else {
+			document.getElementById("arrowimage").src = "../image/middle_right1.gif";
+		}
+	}
+}
+
+</script>
+
+</head>
+
+<body>
+<div class="div">
+	<img src="../image/middle_left1.gif" align="absmiddle" id="arrowimage" style="cursor:pointer;width:10px;" onclick="showMenu()" onMouseOver="changeImage('in')" onMouseOut="changeImage('out')"/>
+</div>
+</body>
+</html>
